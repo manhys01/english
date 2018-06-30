@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox prefWidth="551.0" spacing="5.0"
+	xmlns="http://javafx.com/javafx"
+	xmlns:fx="http://javafx.com/fxml"
+	fx:controller="dev.manhnd.english.controllers.VocabularyFormController">
+	<children>
+		<Text strokeType="OUTSIDE" strokeWidth="0.0" text="Từ vựng" />
+		<TextField fx:id="wordFld" promptText="Từ" />
+		<Label text="IPA" />
+		<TextField fx:id="ipaFld" promptText="IPA" />
+		<Text layoutX="30.0" layoutY="43.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="Từ loại" />
+		<TextField fx:id="wordClassFld" layoutX="30.0"
+			layoutY="47.0" promptText="Từ loại" />
+		<Text layoutX="30.0" layoutY="95.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="Nghĩa tiếng anh" />
+		<TextField fx:id="definitionFld" layoutX="30.0" layoutY="104.0"
+			promptText="Nghĩa tiếng Anh" />
+		<Text layoutX="30.0" layoutY="145.0" strokeType="OUTSIDE"
+			strokeWidth="0.0" text="Nghĩa tiếng việt" />
+		<TextField fx:id="meaningFld" layoutX="30.0" layoutY="153.0"
+			promptText="Nghĩa tiếng Việt" />
+		<HBox>
+			<children>
+				<Button fx:id="chooserImageBtn" mnemonicParsing="false"
+					onAction="#handleChooserImageBtn" text="Chọn file" />
+				<TextField fx:id="imageFld"
+					promptText="Chọn đường dẫn ảnh minh họa..." HBox.hgrow="ALWAYS" />
+			</children>
+		</HBox>
+		<HBox>
+			<children>
+				<Button fx:id="chooseNormalAudioBtn" mnemonicParsing="false"
+					onAction="#handleChooseNormalAudioBtn" text="Chọn file" />
+				<TextField fx:id="normalAudioFld" promptText="Âm thường"
+					HBox.hgrow="ALWAYS" />
+			</children>
+		</HBox>
+		<HBox>
+			<children>
+				<Button fx:id="chooseSpecialAudioBtn" mnemonicParsing="false"
+					onAction="#handleChooseSpecialAudioBtn" text="Chọn file" />
+				<TextField fx:id="specialAudioFld"
+					promptText="Tách ghép âm" HBox.hgrow="ALWAYS" />
+			</children>
+		</HBox>
+		<Button fx:id="actionBtn" mnemonicParsing="false"
+			onAction="#handleActionBtn" prefHeight="25.0" prefWidth="72.0"
+			text="Save">
+			<VBox.margin>
+				<Insets bottom="5.0" top="5.0" />
+			</VBox.margin>
+		</Button>
+	</children>
+	<padding>
+		<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+	</padding>
+</VBox>

@@ -1,0 +1,15 @@
+Thời gian tải Init = 0.795 giây.
+Thời gian tải Hibernate = 3.287 giây.
+Thời gian tải Phrases = 0.801 giây.
+Thời gian tải Phrase Details = 3.584 giây.
+Thời gian tải Sentences = 0.249 giây.
+Thời gian tải Words = 0.159 giây.
+Thời gian tải Word Audios = 0.082 giây.
+Thời gian tải Word classes = 0.772 giây.
+Thời gian tải Vocabularies = 19.256 giây.
+Thời gian tải Vocabulary Images = 0.043 giây.
+Thời gian tải Suggestion = 0.007 giây.
+Thời gian tải Audio Paths = 0.02 giây.
+Thời gian tải GUI = 0.276 giây.
+
+Tổng thời gian khởi động là 29.331000000000003 giây.

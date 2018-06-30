@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="455.0" prefWidth="725.0" spacing="5.0"
+	xmlns="http://javafx.com/javafx"
+	xmlns:fx="http://javafx.com/fxml"
+	fx:controller="dev.manhnd.english.controllers.PhraseDetailController">
+	<children>
+		<HBox>
+			<children>
+				<TextField fx:id="searchFld" alignment="TOP_LEFT"
+					promptText="Tìm kiếm" HBox.hgrow="ALWAYS">
+					<HBox.margin>
+						<Insets />
+					</HBox.margin>
+				</TextField>
+			</children>
+		</HBox>
+		<TableView fx:id="table" tableMenuButtonVisible="true"
+			VBox.vgrow="ALWAYS">
+			<columns>
+				<TableColumn fx:id="id_COL" maxWidth="50.0"
+					minWidth="40.0" prefWidth="50.0" text="ID" />
+				<TableColumn fx:id="phrase_COL" prefWidth="100.0"
+					text="Cụm từ" />
+				<TableColumn fx:id="ipa_COL" prefWidth="100.0"
+					text="Phiên âm" />
+				<TableColumn fx:id="definition_COL" prefWidth="100.0"
+					text="Nghĩa tiếng anh" />
+				<TableColumn fx:id="meaning_COL" minWidth="-1.0"
+					prefWidth="-1.0" text="Nghĩa tiếng việt" />
+				<TableColumn fx:id="description_COL" minWidth="20.0"
+					prefWidth="100.0" text="Mô tả thêm" />
+			</columns>
+			<VBox.margin>
+				<Insets />
+			</VBox.margin>
+			<contextMenu>
+				<ContextMenu>
+					<items>
+						<MenuItem fx:id="addBtn" mnemonicParsing="false"
+							onAction="#handelAddBtn" text="Thêm" />
+						<MenuItem fx:id="editBtn" mnemonicParsing="false"
+							onAction="#handelEditBtn" text="Sửa" />
+						<MenuItem fx:id="updatePhraseBtn" mnemonicParsing="false"
+							onAction="#handleUpdatePhraseBtn" text="Sửa cụm từ" />
+						<MenuItem fx:id="deleteBtn" mnemonicParsing="false"
+							onAction="#handleDeleteBtn" text="Xóa" />
+					</items>
+				</ContextMenu>
+			</contextMenu>
+			<columnResizePolicy>
+				<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			</columnResizePolicy>
+		</TableView>
+	</children>
+	<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</padding>
+</VBox>

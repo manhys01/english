@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="361.0" prefWidth="637.0" spacing="5.0"
+	xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="dev.manhnd.english.controllers.GrammarController">
+	<children>
+		<HBox>
+			<children>
+				<TextField fx:id="searchFld" promptText="Tìm kiếm"
+					HBox.hgrow="ALWAYS" />
+			</children>
+		</HBox>
+		<TableView fx:id="grammarTable" prefHeight="361.0"
+			prefWidth="645.0" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
+			<columns>
+				<TableColumn fx:id="id_col" maxWidth="50.0"
+					minWidth="30.0" prefWidth="50.0" text="ID" />
+				<TableColumn fx:id="lesson_col" prefWidth="382.0"
+					text="Bài học" />
+			</columns>
+			<columnResizePolicy>
+				<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			</columnResizePolicy>
+			<contextMenu>
+				<ContextMenu>
+					<items>
+						<MenuItem mnemonicParsing="false"
+							onAction="#handleViewAction" text="Xem" />
+						<MenuItem mnemonicParsing="false"
+							onAction="#handleAddAction" text="Thêm" />
+						<MenuItem mnemonicParsing="false"
+							onAction="#handleEditAction" text="Sửa" />
+						<MenuItem mnemonicParsing="false"
+							onAction="#exerciseGrammar" text="Trắc nghiệm" />
+					</items>
+				</ContextMenu>
+			</contextMenu>
+		</TableView>
+	</children>
+	<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</padding>
+</VBox>

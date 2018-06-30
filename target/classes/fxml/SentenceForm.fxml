@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox  prefWidth="637.0"
+	xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+	fx:controller="dev.manhnd.english.controllers.SentenceFormController">
+	<children>
+		<Label text="Câu">
+			<VBox.margin>
+				<Insets top="5.0" />
+			</VBox.margin>
+		</Label>
+		<TextField fx:id="sentenceFld" />
+		<Label text="IPA">
+			<VBox.margin>
+				<Insets top="5.0" />
+			</VBox.margin>
+		</Label>
+		<TextField fx:id="ipaFld" />
+		<Label text="Nghĩa">
+			<VBox.margin>
+				<Insets top="5.0" />
+			</VBox.margin>
+		</Label>
+		<TextField fx:id="definitionFld" />
+		<Label text="Âm thanh">
+			<VBox.margin>
+				<Insets top="5.0" />
+			</VBox.margin>
+		</Label>
+		<HBox>
+			<children>
+				<Button fx:id="openFileBtn" mnemonicParsing="false"
+					onAction="#handleOpenFileBtn" prefHeight="25.0" prefWidth="64.0"
+					text="File" />
+				<TextField fx:id="audioFld"
+					promptText="Đường dẫn tới file âm thanh" HBox.hgrow="ALWAYS" />
+			</children>
+		</HBox>
+		<HBox>
+			<VBox.margin>
+				<Insets top="10.0" />
+			</VBox.margin>
+			<children>
+				<Button fx:id="actionBtn" mnemonicParsing="false"
+					onAction="#handleActionBtn" prefHeight="25.0" prefWidth="86.0"
+					text="Add">
+					<HBox.margin>
+						<Insets right="5.0" />
+					</HBox.margin>
+				</Button>
+			</children>
+		</HBox>
+	</children>
+	<padding>
+		<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+	</padding>
+</VBox>

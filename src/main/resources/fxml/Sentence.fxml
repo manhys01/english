@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="5.0" xmlns="http://javafx.com/javafx"
+	xmlns:fx="http://javafx.com/fxml"
+	fx:controller="dev.manhnd.english.controllers.SentenceController">
+	<children>
+		<HBox>
+			<children>
+				<TextField fx:id="searchFld" promptText="Tìm kiếm"
+					HBox.hgrow="ALWAYS">
+					<HBox.margin>
+						<Insets />
+					</HBox.margin>
+				</TextField>
+			</children>
+		</HBox>
+		<TableView fx:id="table" prefHeight="400.0"
+			prefWidth="564.0" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
+			<columns>
+				<TableColumn fx:id="id_COL" maxWidth="60.0"
+					minWidth="40.0" prefWidth="55.0" text="ID" />
+				<TableColumn fx:id="sentence_COL" prefWidth="140.0"
+					text="Câu" />
+				<TableColumn fx:id="ipa_COL" prefWidth="132.0"
+					text="Phiên âm" />
+				<TableColumn fx:id="def_COL" prefWidth="115.0"
+					text="Nghĩa" />
+				<TableColumn fx:id="audio_COL" prefWidth="72.0"
+					text="Âm thanh" />
+			</columns>
+			<columnResizePolicy>
+				<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			</columnResizePolicy>
+			<contextMenu>
+				<ContextMenu>
+					<items>
+						<MenuItem fx:id="viewBtn" mnemonicParsing="false"
+							onAction="#handleViewBtn" text="Xem" />
+						<MenuItem fx:id="addBtn" mnemonicParsing="false"
+							onAction="#handleAddBtn" text="Thêm" />
+						<MenuItem fx:id="editBtn" mnemonicParsing="false"
+							onAction="#handleEditBtn" text="Sửa" />
+						<MenuItem mnemonicParsing="false"
+							onAction="#handleDeleteBtn" text="Xóa" />
+					</items>
+				</ContextMenu>
+			</contextMenu>
+		</TableView>
+	</children>
+	<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</padding>
+</VBox>

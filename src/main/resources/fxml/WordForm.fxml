@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefWidth="431.0" spacing="5.0"
+	xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+	fx:controller="dev.manhnd.english.controllers.WordFormController">
+	<children>
+		<TextField fx:id="wordFld" promptText="word" />
+		<TextField fx:id="ipaFld" promptText="IPA" />
+		<HBox>
+			<children>
+				<Button fx:id="normalAudioBtn" mnemonicParsing="false"
+					onAction="#handleNormalAudioBtn" text="Browse" />
+				<TextField fx:id="normalAudioFld" promptText="audio"
+					HBox.hgrow="ALWAYS" />
+			</children>
+		</HBox>
+		<HBox>
+			<children>
+				<Button fx:id="specialAudioBtn" mnemonicParsing="false"
+					onAction="#handleSpecialAudioBtn" text="Browse" />
+				<TextField fx:id="specialAudioFld"
+					promptText="special audio" HBox.hgrow="ALWAYS" />
+			</children>
+		</HBox>
+		<Button fx:id="saveBtn" mnemonicParsing="false"
+			onAction="#handleSaveBtn" prefHeight="25.0" prefWidth="82.0"
+			text="Save" />
+	</children>
+	<padding>
+		<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+	</padding>
+</VBox>

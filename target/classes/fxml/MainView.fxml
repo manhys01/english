@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.CheckMenuItem?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane fx:id="root" prefHeight="640.0"
+	prefWidth="1024.0" xmlns="http://javafx.com/javafx"
+	xmlns:fx="http://javafx.com/fxml"
+	fx:controller="dev.manhnd.english.controllers.MainController">
+	<top>
+		<VBox fx:id="menuBox" BorderPane.alignment="CENTER">
+			<children>
+				<MenuBar fx:id="menuBar">
+					<menus>
+						<Menu fx:id="fileMenu" mnemonicParsing="false" text="File">
+							<items>
+								<MenuItem fx:id="closeMenuItem" mnemonicParsing="false"
+									text="Close" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Edit">
+							<items>
+								<MenuItem mnemonicParsing="false" text="Delete" />
+							</items>
+						</Menu>
+						<Menu fx:id="windowMenu" mnemonicParsing="false"
+							text="Window">
+							<items>
+								<CheckMenuItem fx:id="treeViewMenuItem"
+									mnemonicParsing="false" onAction="#showTreeView"
+									selected="true" text="TreeView" />
+							</items>
+						</Menu>
+						<Menu mnemonicParsing="false" text="Help">
+							<items>
+								<MenuItem mnemonicParsing="false" text="About" />
+							</items>
+						</Menu>
+					</menus>
+				</MenuBar>
+			</children>
+		</VBox>
+	</top>
+	<center>
+		<SplitPane fx:id="mainSplitPane" dividerPositions="0.2"
+			prefHeight="160.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+			<items>
+				<VBox fx:id="treeBox" alignment="CENTER_RIGHT">
+					<children>
+						<Text onMouseClicked="#closeTreeView" strokeType="OUTSIDE"
+							strokeWidth="0.0" text="X" textAlignment="CENTER"
+							wrappingWidth="23.078125">
+							<cursor>
+								<Cursor fx:constant="HAND" />
+							</cursor>
+						</Text>
+						<TreeView fx:id="treeView" prefHeight="200.0"
+							prefWidth="200.0" VBox.vgrow="ALWAYS" />
+					</children>
+				</VBox>
+				<VBox fx:id="tabPaneBox">
+					<children>
+						<TabPane fx:id="tabPane" prefHeight="466.0"
+							prefWidth="533.0" tabClosingPolicy="UNAVAILABLE"
+							VBox.vgrow="ALWAYS" />
+					</children>
+				</VBox>
+			</items>
+		</SplitPane>
+	</center>
+</BorderPane>

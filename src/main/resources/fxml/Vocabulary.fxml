@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefWidth="788.0" xmlns="http://javafx.com/javafx" spacing="5.0"
+	xmlns:fx="http://javafx.com/fxml"
+	fx:controller="dev.manhnd.english.controllers.VocabularyController">
+	<children>
+		<HBox>
+			<children>
+				<TextField fx:id="searchFld" promptText="Tìm kiếm"
+					HBox.hgrow="ALWAYS" />
+			</children>
+		</HBox>
+		<TableView fx:id="table" prefHeight="400.0"
+			prefWidth="496.0" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
+			<columns>
+				<TableColumn fx:id="id_COL" maxWidth="50.0"
+					minWidth="30.0" prefWidth="50.0" text="ID" />
+				<TableColumn fx:id="word_COL" prefWidth="101.0"
+					text="Từ" />
+				<TableColumn fx:id="ipa_COL" prefWidth="75.0" text="IPA" />
+				<TableColumn fx:id="word_class_COL" prefWidth="104.0"
+					text="Từ loại" />
+				<TableColumn fx:id="definition_COL" prefWidth="147.0"
+					text="Nghĩa tiếng Anh" />
+				<TableColumn fx:id="meaning_COL" prefWidth="138.0"
+					text="Nghĩa tiếng Việt" />
+				<TableColumn fx:id="image_COL" prefWidth="71.0"
+					text="Hình minh họa" />
+			</columns>
+			<columnResizePolicy>
+				<TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+			</columnResizePolicy>
+			<contextMenu>
+				<ContextMenu>
+					<items>
+						<MenuItem fx:id="addBtn" mnemonicParsing="false"
+							onAction="#handleAddBtn" text="Thêm" />
+						<MenuItem fx:id="editBtn" mnemonicParsing="false"
+							onAction="#handleEditBtn" text="Sửa" />
+					</items>
+				</ContextMenu>
+			</contextMenu>
+		</TableView>
+	</children>
+	<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</padding>
+</VBox>

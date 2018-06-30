@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefWidth="474.0" spacing="5.0"
+	xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+	fx:controller="dev.manhnd.english.controllers.WordClassFormController">
+	<children>
+		<Label text="Từ loại" />
+		<TextField fx:id="nameFld" />
+		<Label text="Nghĩa" />
+		<TextField fx:id="definitionFld" />
+		<Label text="Mô tả" />
+		<TextArea fx:id="descriptionFld" prefHeight="200.0"
+			prefWidth="200.0" />
+		<Button fx:id="actionBtn" mnemonicParsing="false"
+			onAction="#handleActionBtn" text="Save" />
+	</children>
+	<padding>
+		<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+	</padding>
+</VBox>
