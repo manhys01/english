@@ -23,7 +23,7 @@
 					HBox.hgrow="ALWAYS" />
 			</children>
 		</HBox>
-		<TableView fx:id="grammarTable" prefHeight="361.0"
+		<TableView fx:id="table" prefHeight="361.0"
 			prefWidth="645.0" tableMenuButtonVisible="true" VBox.vgrow="ALWAYS">
 			<columns>
 				<TableColumn fx:id="id_col" maxWidth="50.0"

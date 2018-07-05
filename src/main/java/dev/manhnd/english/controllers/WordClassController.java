@@ -9,19 +9,19 @@ import org.controlsfx.control.textfield.TextFields;
 
 import dev.manhnd.english.application.ApplicationDataModel;
 import dev.manhnd.english.entities.WordClass;
-import dev.manhnd.english.utils.ScreenUtils;
+import dev.manhnd.english.utils.FXUtils;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -60,7 +60,7 @@ public class WordClassController implements Initializable {
 		definition_COL.setCellValueFactory(new PropertyValueFactory<>("definition"));
 		description_COL.setCellValueFactory(new PropertyValueFactory<>("description"));
 		table.setItems(ApplicationDataModel.getInstance().getWordClasses());
-		
+
 		ApplicationDataModel.getInstance().getWordClasses().addListener(new ListChangeListener<WordClass>() {
 			@Override
 			public void onChanged(Change<? extends WordClass> c) {
@@ -87,7 +87,7 @@ public class WordClassController implements Initializable {
 
 		bindAutoCompletion = TextFields.bindAutoCompletion(searchFld,
 				ApplicationDataModel.getInstance().getWordClassesSuggestionProvider());
-		
+
 		bindAutoCompletion.minWidthProperty().bind(searchFld.widthProperty());
 		bindAutoCompletion.setOnAutoCompleted(e -> {
 			WordClass wordClass = e.getCompletion();
@@ -101,16 +101,18 @@ public class WordClassController implements Initializable {
 	void handleAddBtn(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/WordClassForm.fxml"));
-			Stage stage = new Stage();
-			stage.setTitle("Thêm từ loại");
 			VBox root = loader.load();
 			WordClassFormController controller = loader.getController();
 			controller.setWordClass(null);
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			Scene scene = new Scene(root);
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-			stage.setScene(scene);
-			stage.showAndWait();
+
+			Stage popUpStage = new Stage();
+			popUpStage.setTitle("Thêm từ loại");
+			popUpStage.setScene(new Scene(root));
+
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+
+			popUpStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -120,18 +122,22 @@ public class WordClassController implements Initializable {
 	void handleEditBtn(ActionEvent event) {
 		try {
 			int index = table.getSelectionModel().getSelectedIndex();
+			if (index < 0)
+				return;
 			WordClass w = table.getItems().get(index);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/WordClassForm.fxml"));
-			Stage stage = new Stage();
-			stage.setTitle("Sửa từ loại");
-			VBox root = loader.load();
+			Parent layout = loader.load();
 			WordClassFormController controller = loader.getController();
 			controller.setWordClass(w);
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			Scene scene = new Scene(root);
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-			stage.setScene(scene);
-			stage.showAndWait();
+			
+			Stage popUpStage = new Stage();
+			popUpStage.setTitle("Sửa từ loại");
+			popUpStage.setScene(new Scene(layout));
+
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+			
+			popUpStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

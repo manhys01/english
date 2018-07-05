@@ -13,6 +13,9 @@ import dev.manhnd.english.entities.Phrase;
 public class IPAPhraseApp {
 	public static void main(String[] args) throws Exception {
 		List<Phrase> phrases = DAOFactory.getPhraseDAO().getPhrasesWhereIPAisEmpty();
+//		phrases.forEach(e->{
+//			System.out.println(e.getPhrase());
+//		});
 		new IPAPhraseApp().update(phrases);
 		HibernateUtil.closeSessionFactory();
 	}

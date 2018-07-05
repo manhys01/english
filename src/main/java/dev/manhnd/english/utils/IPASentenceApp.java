@@ -14,9 +14,9 @@ public class IPASentenceApp {
 	public static void main(String[] args) throws Exception {
 		List<Sentence> sentences = DAOFactory.getSentenceDAO().getSentencesWhereIPAIsNull();
 		double lastTime = System.currentTimeMillis();
-		sentences.forEach(e->{
-			System.out.println(e.getSentence());
-		});
+//		sentences.forEach(e->{
+//			System.out.println(e.getSentence());
+//		});
 		new IPASentenceApp().update(sentences);
 		double currentTime = System.currentTimeMillis();
 		System.out.println("Tổng thời gian = " + (currentTime - lastTime) / 1000);

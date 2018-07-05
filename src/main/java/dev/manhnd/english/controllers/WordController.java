@@ -9,21 +9,20 @@ import org.controlsfx.control.textfield.TextFields;
 
 import dev.manhnd.english.application.ApplicationDataModel;
 import dev.manhnd.english.entities.Word;
-import dev.manhnd.english.utils.ScreenUtils;
+import dev.manhnd.english.utils.FXUtils;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class WordController implements Initializable {
@@ -111,15 +110,16 @@ public class WordController implements Initializable {
 	void handleAddBtn(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/WordForm.fxml"));
-			VBox root = loader.load();
-			Stage stage = new Stage();
-			stage.setTitle("Thêm từ");
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			stage.initModality(Modality.APPLICATION_MODAL);
-			Scene scene = new Scene(root);
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-			stage.setScene(scene);
-			stage.showAndWait();
+			Parent root = loader.load();
+			
+			Stage popUpStage = new Stage();
+			popUpStage.setTitle("Thêm từ");
+			popUpStage.setScene(new Scene(root));
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+			
+			popUpStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -134,17 +134,18 @@ public class WordController implements Initializable {
 				return;
 			Word w = table.getItems().get(index);
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/WordForm.fxml"));
-			Stage stage = new Stage();
-			stage.setTitle("Sửa từ");
 			VBox root = loader.load();
 			WordFormController controller = loader.getController();
 			controller.setWord(w);
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-			stage.showAndWait();
+			
+			Stage popUpStage = new Stage();
+			popUpStage.setTitle("Sửa từ");
+			popUpStage.setScene(new Scene(root));
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+			
+			popUpStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

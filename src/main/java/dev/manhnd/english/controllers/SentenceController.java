@@ -9,10 +9,9 @@ import org.controlsfx.control.textfield.AutoCompletionBinding;
 import org.controlsfx.control.textfield.TextFields;
 
 import dev.manhnd.english.application.ApplicationDataModel;
-import dev.manhnd.english.dao.DAOFactory;
 import dev.manhnd.english.entities.Sentence;
+import dev.manhnd.english.utils.FXUtils;
 import dev.manhnd.english.utils.SimpleAudioPlayer;
-import dev.manhnd.english.utils.ScreenUtils;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +26,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -110,20 +108,21 @@ public class SentenceController implements Initializable {
 			SentenceFormController controller = fxmlLoader.getController();
 			controller.setSentence(null);
 			controller.getActionBtn().setText("Add");
-			Scene scene = new Scene(root);
-			Stage stage = new Stage();
-
-			ScreenUtils.setStageToScreen(searchFld, stage);
-
-			stage.setTitle("Thêm câu");
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.setScene(scene);
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-			stage.showAndWait();
+			
+			Stage popUpStage = new Stage();
+			popUpStage.setTitle("Thêm câu");
+			popUpStage.setScene(new Scene(root));
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+			
+			popUpStage.showAndWait();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}
+
+	
 
 	@FXML
 	void handleEditBtn() {
@@ -135,14 +134,15 @@ public class SentenceController implements Initializable {
 			SentenceFormController controller = fxmlLoader.getController();
 			controller.setSentence(s);
 			controller.getActionBtn().setText("Update");
-			Scene scene = new Scene(root);
-			Stage stage = new Stage();
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			stage.setTitle("Sửa câu");
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.setScene(scene);
-			stage.getIcons().add(new Image("/images/icons/logo.png"));
-			stage.showAndWait();
+			
+			Stage popUpStage = new Stage();
+			popUpStage.setTitle("Sửa câu");
+			popUpStage.setScene(new Scene(root));
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+			
+			popUpStage.showAndWait();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -156,27 +156,28 @@ public class SentenceController implements Initializable {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/SentenceDetails.fxml"));
 			Parent root = fxmlLoader.load();
 			SentenceDetailsController controller = fxmlLoader.getController();
-			Scene scene = new Scene(root);
-			Stage stage = new Stage();
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			stage.setTitle("Xem chi tiết");
-			stage.getIcons().add(new Image("/images/icons/logo.png"));
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.setScene(scene);
+			
+			Stage popUpStage = new Stage();
+			popUpStage.setTitle("Xem chi tiết");
+			popUpStage.setScene(new Scene(root));
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+			
 			if (s.getAudio() != null) {
 				if (!s.getAudio().isEmpty()) {
 					File file = new File(s.getAudio());
 					SimpleAudioPlayer audioPlayer = new SimpleAudioPlayer(file);
 					controller.sendData(s, audioPlayer);
-					stage.showAndWait();
+					popUpStage.showAndWait();
 					audioPlayer.getPlayer().stop();
 				} else {
 					controller.sendData(s);
-					stage.showAndWait();
+					popUpStage.showAndWait();
 				}
 			} else {
 				controller.sendData(s);
-				stage.showAndWait();
+				popUpStage.showAndWait();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -195,8 +196,9 @@ public class SentenceController implements Initializable {
 			alert.initModality(Modality.APPLICATION_MODAL);
 			Optional<ButtonType> optional = alert.showAndWait();
 			if (ButtonType.OK == optional.get()) {
-				DAOFactory.getSentenceDAO().deleteSentence(s);
-				table.getItems().remove(index);
+				System.out.println("Không thể xóa: "  + s);
+				// DAOFactory.getSentenceDAO().deleteSentence(s);
+				// table.getItems().remove(index);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -11,7 +11,7 @@ import org.controlsfx.control.textfield.TextFields;
 import dev.manhnd.english.application.ApplicationDataModel;
 import dev.manhnd.english.entities.Phrase;
 import dev.manhnd.english.entities.PhraseDetail;
-import dev.manhnd.english.utils.ScreenUtils;
+import dev.manhnd.english.utils.FXUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -29,8 +29,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class PhraseDetailController implements Initializable {
@@ -130,13 +128,16 @@ public class PhraseDetailController implements Initializable {
 			PhraseDetailFormController controller = fxmlLoader.getController();
 			controller.setPhraseDetail(null);
 			controller.getActionBtn().setText("Add");
-			Stage stage = new Stage();
-			stage.setTitle("Thêm cụm từ");
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			stage.setScene(new Scene(root));
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-			stage.showAndWait();
+			
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			Stage popUpStage = new Stage();
+			popUpStage.setTitle("Thêm cụm từ");
+			popUpStage.setScene(new Scene(root));
+			
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+			
+			popUpStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -155,13 +156,15 @@ public class PhraseDetailController implements Initializable {
 			PhraseDetailFormController controller = fxmlLoader.getController();
 			controller.setPhraseDetail(p);
 			controller.getActionBtn().setText("Update");
-			Stage stage = new Stage();
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			stage.setScene(new Scene(root));
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-			stage.setTitle("Sửa cụm từ");
-			stage.showAndWait();
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			Stage popUpStage = new Stage();
+			popUpStage.setScene(new Scene(root));
+			popUpStage.setTitle("Sửa cụm từ");
+			
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+			
+			popUpStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -188,13 +191,15 @@ public class PhraseDetailController implements Initializable {
 			Parent root = fxmlLoader.load();
 			PhraseFormController controller = fxmlLoader.getController();
 			controller.setPhrase(p, phraseIndex, phraseDetailIndex);
-			Stage stage = new Stage();
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			stage.setScene(new Scene(root));
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-			stage.setTitle("Sửa cụm từ");
-			stage.showAndWait();
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			Stage popUpStage = new Stage();
+			popUpStage.setScene(new Scene(root));
+			popUpStage.setTitle("Sửa cụm từ");
+			
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+			
+			popUpStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

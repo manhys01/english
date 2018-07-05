@@ -9,7 +9,7 @@ import org.controlsfx.control.textfield.TextFields;
 
 import dev.manhnd.english.application.ApplicationDataModel;
 import dev.manhnd.english.entities.Vocabulary;
-import dev.manhnd.english.utils.ScreenUtils;
+import dev.manhnd.english.utils.FXUtils;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
@@ -22,10 +22,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class VocabularyController implements Initializable {
@@ -117,17 +115,19 @@ public class VocabularyController implements Initializable {
 	void handleAddBtn(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VocabularyForm.fxml"));
-			Stage stage = new Stage();
-			stage.setTitle("Thêm từ vựng");
-			VBox root = loader.load();
+			
+			VBox layout = loader.load();
 			VocabularyFormController controller = loader.getController();
 			controller.getActionBtn().setText("Add");
-			Scene scene = new Scene(root);
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			stage.setScene(scene);
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-			stage.showAndWait();
+			
+			Stage popUpStage = new Stage();
+			popUpStage.setTitle("Thêm từ vựng");
+			popUpStage.setScene(new Scene(layout));
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+			
+			popUpStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -142,18 +142,19 @@ public class VocabularyController implements Initializable {
 				return;
 			}
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/VocabularyForm.fxml"));
-			Stage stage = new Stage();
-			stage.setTitle("Thêm từ vựng");
-			VBox root = loader.load();
+			VBox layout = loader.load();
 			VocabularyFormController controller = loader.getController();
 			controller.setVocabulary(v, index);
 			controller.getActionBtn().setText("Update");
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			Scene scene = new Scene(root);
-			stage.setScene(scene);
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-			stage.showAndWait();
+			
+			Stage popUpStage = new Stage();
+			popUpStage.setTitle("Sửa từ vựng");
+			popUpStage.setScene(new Scene(layout));
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+			
+			popUpStage.showAndWait();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

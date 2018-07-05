@@ -10,7 +10,7 @@ import dev.manhnd.english.application.ApplicationDataModel;
 import dev.manhnd.english.dao.DAOFactory;
 import dev.manhnd.english.entities.Grammar;
 import dev.manhnd.english.utils.ExerciseGrammar;
-import dev.manhnd.english.utils.ScreenUtils;
+import dev.manhnd.english.utils.FXUtils;
 import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,15 +24,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.web.WebView;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class GrammarController implements Initializable {
 
 	@FXML
-	private TableView<Grammar> grammarTable;
+	private TableView<Grammar> table;
 
 	@FXML
 	private TableColumn<Grammar, Integer> id_col;
@@ -47,7 +45,7 @@ public class GrammarController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		id_col.setCellValueFactory(new PropertyValueFactory<>("id"));
 		lesson_col.setCellValueFactory(new PropertyValueFactory<>("lesson"));
-		grammarTable.setItems(ApplicationDataModel.getInstance().getGrammars());
+		table.setItems(ApplicationDataModel.getInstance().getGrammars());
 
 		ApplicationDataModel.getInstance().getGrammars().addListener(new ListChangeListener<Grammar>() {
 			@Override
@@ -65,8 +63,8 @@ public class GrammarController implements Initializable {
 						} else if (c.wasAdded()) {
 							System.out.println("Grammar Added from " + c.getFrom() + " to " + c.getTo());
 							Grammar g = c.getList().get(c.getFrom());
-							grammarTable.scrollTo(g);
-							grammarTable.getSelectionModel().select(g);
+							table.scrollTo(g);
+							table.getSelectionModel().select(g);
 						}
 					}
 				}
@@ -81,17 +79,16 @@ public class GrammarController implements Initializable {
 			loader.setLocation(getClass().getResource("/fxml/GrammarForm.fxml"));
 			Parent form = loader.load();
 			GrammarFormController controller = loader.getController();
-
 			controller.setData("Add", null, 0);
+			
+			Stage popUpStage = new Stage();
+			popUpStage.setScene(new Scene(form));
+			popUpStage.setTitle("Thêm");
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
 
-			Stage stage = new Stage();
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.setScene(new Scene(form));
-			stage.setTitle("Thêm");
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-
-			stage.showAndWait();
+			popUpStage.showAndWait();
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText(e.getMessage());
@@ -102,24 +99,25 @@ public class GrammarController implements Initializable {
 	@FXML
 	void handleEditAction(ActionEvent event) throws IOException {
 		try {
-			int index = grammarTable.getSelectionModel().getSelectedIndex();
+			int index = table.getSelectionModel().getSelectedIndex();
 			if (index < 0)
 				return;
-			Grammar g = grammarTable.getItems().get(index);
+			Grammar g = table.getItems().get(index);
 
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/fxml/GrammarForm.fxml"));
 			Parent form = loader.load();
 			GrammarFormController controller = loader.getController();
 			controller.setData("Update", g, index);
-			Stage stage = new Stage();
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.setScene(new Scene(form));
-			stage.setTitle("Sửa");
-			ScreenUtils.setStageToScreen(searchFld, stage);
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
+			
+			Stage popUpStage = new Stage();
+			popUpStage.setScene(new Scene(form));
+			popUpStage.setTitle("Sửa");
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
 
-			stage.showAndWait();
+			popUpStage.showAndWait();
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText(e.getMessage());
@@ -129,39 +127,44 @@ public class GrammarController implements Initializable {
 
 	@FXML
 	void handleViewAction(ActionEvent event) throws MalformedURLException {
-		int index = grammarTable.getSelectionModel().getSelectedIndex();
+		int index = table.getSelectionModel().getSelectedIndex();
 		if (index < 0)
 			return;
-		Grammar g = grammarTable.getItems().get(index);
+		Grammar g = table.getItems().get(index);
 		WebView view = new WebView();
 		view.getEngine().load(new File(g.getPath()).toURI().toURL().toString());
 
-		Stage stage = new Stage();
-		stage.initModality(Modality.APPLICATION_MODAL);
-		stage.setTitle(g.getLesson());
-		stage.setScene(new Scene(view, 800, 600));
-		stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-		stage.showAndWait();
+		Stage popUpStage = new Stage();
+		popUpStage.setTitle(g.getLesson());
+		popUpStage.setScene(new Scene(view, 1024, 640));
+		
+		Stage primaryStage = (Stage) table.getScene().getWindow();
+		FXUtils.centerPopUpStage(primaryStage, popUpStage);
+		
+		popUpStage.showAndWait();
 	}
 
 	@FXML
 	void exerciseGrammar(ActionEvent event) {
 		try {
-			int index = grammarTable.getSelectionModel().getSelectedIndex();
+			int index = table.getSelectionModel().getSelectedIndex();
 			if (index < 0)
 				return;
-			Grammar g = grammarTable.getItems().get(index);
-			Stage stage = new Stage();
-			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.setTitle("Bài " + g.getId() + ": " + g.getLesson());
-
-			ExerciseGrammar content = new ExerciseGrammar(
+			Grammar g = table.getItems().get(index);
+			ExerciseGrammar layout = new ExerciseGrammar(
 					DAOFactory.getGrammarQuestionDAO().getGrammarQuestionsByDay(g.getId()));
-			Scene scene = new Scene(content, 800, 350);
+			
+			Stage popUpStage = new Stage();
+			popUpStage.setTitle("Bài " + g.getId() + ": " + g.getLesson());
+			
+			Scene scene = new Scene(layout, 800, 380);
 			scene.getStylesheets().add("/styles/grammar_exercise.css");
-			stage.getIcons().add(new Image(ApplicationDataModel.APPLICATION_ICON));
-			stage.setScene(scene);
-			stage.showAndWait();
+			popUpStage.setScene(scene);
+			
+			Stage primaryStage = (Stage) table.getScene().getWindow();
+			FXUtils.centerPopUpStage(primaryStage, popUpStage);
+			
+			popUpStage.showAndWait();
 		} catch (Exception e) {
 			new Alert(AlertType.ERROR).showAndWait();
 		}
