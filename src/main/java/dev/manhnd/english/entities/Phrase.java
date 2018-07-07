@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Phrases")
+@Table(name = "phrases")
 public class Phrase {
 	
 	@Id
@@ -26,7 +26,7 @@ public class Phrase {
 	@Column(name = "created", insertable = false, updatable = false)
 	private Date created;
 
-	@Column(name = "latestUpdate", insertable = false, updatable = false)
+	@Column(name = "latestupdate", insertable = false, updatable = false)
 	private Date latestUpdate;
 	
 	public Phrase() {

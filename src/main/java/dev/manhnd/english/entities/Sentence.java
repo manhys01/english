@@ -17,7 +17,7 @@ public class Sentence {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(length = 255, unique = true)
+	@Column(name="sentence", length = 255, unique = true)
 	private String sentence;
 
 	@Column(name = "ipa", length = 255)
@@ -32,7 +32,7 @@ public class Sentence {
 	@Column(name = "created", insertable = false, updatable = false)
 	private Date created;
 
-	@Column(name = "latestUpdate", insertable = false, updatable = false)
+	@Column(name = "latestupdate", insertable = false, updatable = false)
 	private Date latestUpdate;
 
 	public Sentence() {
@@ -45,7 +45,7 @@ public class Sentence {
 		this.audio = audio;
 		this.definition = definition;
 	}
-	
+
 	public Sentence(Long id, String sentence, String ipa, String audio, String definition) {
 		super();
 		this.id = id;
@@ -53,15 +53,6 @@ public class Sentence {
 		this.ipa = ipa;
 		this.audio = audio;
 		this.definition = definition;
-	}
-
-	public Sentence deepCopy() {
-		Sentence clone = new Sentence(id, sentence, ipa, audio, definition);
-		return clone;
-	}
-	
-	public int compareTo(String targetKey) {
-		return sentence.compareToIgnoreCase(targetKey);
 	}
 
 	public Long getId() {
@@ -122,6 +113,13 @@ public class Sentence {
 
 	@Override
 	public String toString() {
-		return sentence + "\n" + definition;
+		return "Sentence [id=" + id + ", sentence=" + sentence + ", ipa=" + ipa + ", audio=" + audio + ", definition="
+				+ definition + ", created=" + created + ", latestUpdate=" + latestUpdate + "]";
 	}
+
+	// @Override
+	// public String toString() {
+	// return sentence + "\n" + definition;
+	// }
+
 }

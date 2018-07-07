@@ -10,6 +10,7 @@ import javax.persistence.Transient;
 
 import dev.manhnd.english.utils.SimpleAudioPlayer;
 
+
 @Entity
 @Table(name = "words")
 public class Word {

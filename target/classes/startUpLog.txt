@@ -1,15 +1,15 @@
-Thời gian tải Init = 0.627 giây.
-Thời gian tải Hibernate = 2.97 giây.
-Thời gian tải Phrases = 0.526 giây.
-Thời gian tải Phrase Details = 2.453 giây.
-Thời gian tải Sentences = 0.183 giây.
+Thời gian tải Init = 0.948 giây.
+Thời gian tải Hibernate = 2.946 giây.
+Thời gian tải Phrases = 0.501 giây.
+Thời gian tải Phrase Details = 2.302 giây.
+Thời gian tải Sentences = 0.154 giây.
 Thời gian tải Words = 0.022 giây.
-Thời gian tải Word Audios = 0.028 giây.
-Thời gian tải Word classes = 0.415 giây.
-Thời gian tải Vocabularies = 2.707 giây.
-Thời gian tải Vocabulary Images = 0.007 giây.
-Thời gian tải Suggestion = 0.005 giây.
-Thời gian tải Audio Paths = 0.0 giây.
-Thời gian tải GUI = 0.143 giây.
+Thời gian tải Word Audios = 0.04 giây.
+Thời gian tải Word classes = 0.46 giây.
+Thời gian tải Vocabularies = 14.6 giây.
+Thời gian tải Vocabulary Images = 0.02 giây.
+Thời gian tải Suggestion = 0.004 giây.
+Thời gian tải Audio Paths = 0.008 giây.
+Thời gian tải GUI = 0.251 giây.
 
-Tổng thời gian khởi động là 10.086000000000002 giây.
+Tổng thời gian khởi động là 22.256 giây.

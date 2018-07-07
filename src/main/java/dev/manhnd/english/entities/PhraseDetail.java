@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "PhraseDetails")
+@Table(name = "phrasedetails")
 public class PhraseDetail {
 
 	@Id
@@ -36,7 +36,7 @@ public class PhraseDetail {
 	@Column(name = "created", insertable = false, updatable = false)
 	private Date created;
 
-	@Column(name = "latestUpdate", insertable = false, updatable = false)
+	@Column(name = "latestupdate", insertable = false, updatable = false)
 	private Date latestUpdate;
 
 	public PhraseDetail() {

@@ -70,6 +70,7 @@ public class PhraseDetailController implements Initializable {
 	private MenuItem deleteBtn;
 
 	private AutoCompletionBinding<PhraseDetail> autoCompleteSearchFld;
+	
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

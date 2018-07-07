@@ -40,7 +40,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-public class LearningEnglishApplication extends Application {
+public class Launcher extends Application {
 
 	public static void main(String[] args) {
 		Application.launch(args);

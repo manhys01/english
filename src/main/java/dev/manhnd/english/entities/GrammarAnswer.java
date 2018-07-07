@@ -1,5 +1,6 @@
 package dev.manhnd.english.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,10 +19,12 @@ public class GrammarAnswer {
 	private String answer;
 	private String meaning;
 	private String description;
+	
+	@Column(name="rightanswer")
 	private boolean rightAnswer;
 
 	@ManyToOne
-	@JoinColumn(name = "GrammarQuestionID")
+	@JoinColumn(name = "grammarquestionid")
 	private GrammarQuestion question;
 
 	public GrammarAnswer() {
